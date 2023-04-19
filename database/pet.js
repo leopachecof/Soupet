@@ -16,12 +16,13 @@ const Pet = connection.define("pet", {
         allowNull: false
     },
     dataNasc: {
-        type: DataTypes.DATEONLY
+        type: DataTypes.DATEONLY,
     }
 });
 
 // Relacionamento 1:N (Um cliente pode ter N pets)
-Cliente.hasMany(Pet);
+Cliente.hasMany(Pet, { onDelete: "CASCADE" });
+// CASCADE = quando um cliente for deletado, TODOS os pets serão deletados
 Pet.belongsTo(Cliente); // Um pet pertece a um cliente
 
 module.exports = Pet;
